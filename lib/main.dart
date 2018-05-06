@@ -1,31 +1,19 @@
-// Replace the code in main.dart with the following.
-
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart'; 
 import 'package:flutter/foundation.dart';
 
 void main() {
-  runApp(new FriendlychatApp());
+  runApp(new StryApp());
 }
-final ThemeData kIOSTheme = new ThemeData(
-  primarySwatch: Colors.orange,
-  primaryColor: Colors.grey[100],
-  primaryColorBrightness: Brightness.light,
-);
 
-final ThemeData kDefaultTheme = new ThemeData(
-  primarySwatch: Colors.purple,
-  accentColor: Colors.orangeAccent[400],
-);
-
-class FriendlychatApp extends StatelessWidget {
+class StryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: "Friendlychat",
-      theme: defaultTargetPlatform == TargetPlatform.iOS         //new
-        ? kIOSTheme                                              //new
-        : kDefaultTheme,                                         //new
+      title: "stry",
+      theme: new ThemeData(
+        primaryColor: Colors.white,
+        accentColor: Colors.indigoAccent[400],
+      ),                                        //new
       home: new ChatScreen(),
     );
   }
@@ -48,9 +36,18 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
   return new Scaffold(
     appBar: new AppBar(
-        title: new Text("Friendlychat"),
-        elevation:
-            Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0),
+        title: new Text("stry"),
+        elevation: 0.7,
+        actions: <Widget>[
+            // action button
+            new IconButton(
+              icon: new Icon(Icons.directions_car),
+              onPressed: () {
+              },
+            ),
+        ],
+        ),
+        
     body: new Container(                                             //modified
         child: new Column(                                           //modified
           children: <Widget>[
@@ -109,12 +106,7 @@ void dispose() {                                                   //new
           ),
           new Container(
    margin: new EdgeInsets.symmetric(horizontal: 4.0),
-   child: Theme.of(context).platform == TargetPlatform.iOS ?  //modified
-   new CupertinoButton(                                       //new
-     child: new Text("Send"),                                 //new
-     onPressed: _isComposing                                  //new
-         ? () =>  _handleSubmitted(_textController.text)      //new
-         : null,) :                                           //new
+   child:                                            //new
    new IconButton(                                            //modified
        icon: new Icon(Icons.send),
        onPressed: _isComposing ?
